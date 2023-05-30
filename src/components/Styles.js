@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     width: 100%;
-    background: #0c111b;
+    background: #DDFFE7;
     position: relative;
     font-family: roboto, sans-serif;
   }
@@ -22,7 +22,7 @@ export const StyledContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #0C0A25 ;
+    background-color: #DDFFE7 ;
     background-size: cover;
     background-attachment: fixed;
 `;
@@ -34,14 +34,14 @@ export const Navbar = styled.div`
   top: 0;
   left: 0;
   padding: 0 4%;
-  background: #121926;
+  background: #167D7F;
   z-index: 9;
   display: flex;
   align-items: center;
 `;
 
 export const BrandLogo = styled.img`
-  height: 70px;
+  height: 50px;
 `;
 
 export const NavLinks = styled.ul`
@@ -70,7 +70,7 @@ export const RightContainer = styled.div`
 
 export const SearchBox = styled.input`
   border: none;
-  border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid #fff;
   background: transparent;
   outline: none;
   height: 30px;
@@ -81,8 +81,12 @@ export const SearchBox = styled.input`
   font-weight: 500;
   transition: 0.2s;
 
+  &::placeholder {
+    color: #98D7C2;
+  }
+
   &:focus {
-    border-color: #1f80e0;
+    border-color: #98D7C2;
     width: 400px;
   }
 `;
@@ -90,7 +94,7 @@ export const SearchBox = styled.input`
 export const LoginLink = styled.a`
   color: #fff;
   opacity: 0.9;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   text-decoration: none;
 `;
@@ -167,7 +171,7 @@ export const CardBody = styled.div`
   top: 0;
   left: 0;
   z-index: 2;
-  background: linear-gradient(to bottom, rgba(4, 8, 15, 0), #192133 90%);
+  background: linear-gradient(to bottom, rgba(4, 8, 15, 0), #98D7C2 90%);
   padding: 10px;
   transition: 0.5s;
 
@@ -235,7 +239,7 @@ export const PreviousButton = styled.button`
   outline: none;
   cursor: pointer;
   left: 0;
-  background: linear-gradient(to right, #0c111b 0%, #0c111b00);
+  background: linear-gradient(to right, #167D7F 0%, #167D7F00);
 
   img {
     width: 15px;
@@ -258,7 +262,7 @@ export const NextButton = styled.button`
   outline: none;
   cursor: pointer;
   right: 0;
-  background: linear-gradient(to left, #0c111b 0%, #0c111b00);
+  background: linear-gradient(to left, #167D7F 0%, #167D7F00);
 
   img {
     width: 15px;
