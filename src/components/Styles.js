@@ -99,6 +99,27 @@ export const LoginLink = styled.a`
   text-decoration: none;
 `;
 
+export const FooterHeadContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80px;
+  padding: 0 4%;
+  background: #167D7F;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;  
+`;
+
+export const FooterHeadText = styled.p`
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+`;
+
 export const BookTitle = styled.h1`
   padding-left: 50px;
   text-transform: capitalize;

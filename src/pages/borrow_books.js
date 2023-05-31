@@ -1,10 +1,17 @@
 import React from 'react';
-import {} from '../components/Styles';
+import {
+    GlobalStyle
+  } from '../components/Styles';
+import NavbarHead  from '../components/NavbarHead';
+import FooterBottom  from '../components/FooterBottom';
 
 const Borrow = () => {
     return (
         <div>
-
+            <GlobalStyle />
+            <NavbarHead />
+            Hello World Borrow Books
+            <FooterBottom />
         </div>
     );
 };

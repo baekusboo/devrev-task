@@ -1,48 +1,17 @@
 import React from 'react';
 import {
-  GlobalStyle,
-  StyledContainer,
-  Navbar,
-  NavLinks,
-  NavLink,
-  NavItem,
-  SearchBox,
-  RightContainer,
-  BrandLogo,
-  LoginLink
+  GlobalStyle
 } from '../components/Styles';
+import NavbarHead  from '../components/NavbarHead';
+import FooterBottom  from '../components/FooterBottom';
 
 const Home = () => {
   return (
     <div>
       <GlobalStyle />
-      <Navbar>
-        <NavLinks>
-          <NavItem>
-            <LoginLink href="#">Login</LoginLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="#">Home</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="#">Profile</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="#">View Books</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="#">Borrow Books</NavLink>
-          </NavItem>
-        </NavLinks>
-        <RightContainer>
-          <SearchBox type="text" placeholder="Search for Books" />
-        </RightContainer>
-        <RightContainer style={{ marginLeft: '20px' }}>
-          <BrandLogo src="logo.png" alt="Library Management System Logo" />
-        </RightContainer>
-      </Navbar>
-
+      <NavbarHead />
       <div>Library Management System</div>
+      <FooterBottom />
     </div>
   );
 };
