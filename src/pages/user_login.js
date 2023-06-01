@@ -31,20 +31,20 @@ const Login = () => {
             
         <form style={{ marginTop: '50px',marginLeft: '550px' }}>
             <FormGroup>
-            <Label>Username:</Label>
+            <Label>Username</Label>
             <Input
               type="text"
-              placeholder="Enter your username."
+              placeholder="Enter your username"
               id="name"
               name="name"
             />
           </FormGroup>
 
           <FormGroup>
-            <Label>Password:</Label>
+            <Label>Password</Label>
             <Input
               type="password"
-              placeholder="Enter your password."
+              placeholder="Enter your password"
               id="pw"
               name="pw"
             />

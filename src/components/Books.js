@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 import {
@@ -10,7 +10,9 @@ import {
   BookImage,
   BookName,
   BookDescription,
-  Button
+  Button,
+  FilterContainer,
+  Input
 } from './Styles';
 
 import book1 from "../images/age-of-vice-book.png";
@@ -44,6 +46,7 @@ const bookData = [
     title: "Age of Vice",
     author: "Deepti Kapoor",
     image: book1,
+    subject: "Emotional",
     releasedate: "Jan 3, 2023",
   },
   {
@@ -51,6 +54,7 @@ const bookData = [
     title: "City Under One Roof",
     author: "Iris Yamashita",
     image: book2,
+    subject: "Melodrama",
     releasedate: "Jan 10, 2023",
   },
   {
@@ -58,6 +62,7 @@ const bookData = [
     title: "The World and All That It Holds",
     author: "Aleksandar Hemon",
     image: book3,
+    subject: "Melodrama",
     releasedate: "Jan 24, 2023",
   },
   {
@@ -65,6 +70,7 @@ const bookData = [
     title: "Maame",
     author: "Jessica George",
     image: book4,
+    subject: "Thriller",
     releasedate: "Jan 31, 2023",
   },
   {
@@ -72,6 +78,7 @@ const bookData = [
     title: "Essex Dogs",
     author: "Dan Jones",
     image: book5,
+    subject: "Adventure",
     releasedate: "Feb 7, 2023",
   },
   {
@@ -79,6 +86,7 @@ const bookData = [
     title: "What Happened to Ruthy Ramirez",
     author: "Claire Jiménez",
     image: book6,
+    subject: "Thriller",
     releasedate: "March 7, 2023",
   },
   {
@@ -86,6 +94,7 @@ const bookData = [
     title: "A Death at the Party",
     author: "Amy Stuart",
     image: book7,
+    subject: "Horror",
     releasedate: "March 7, 2023",
   },
   {
@@ -93,6 +102,7 @@ const bookData = [
     title: "The God of Endings",
     author: "Jacqueline Holland",
     image: book8,
+    subject: "Comedy",
     releasedate: "March 7, 2023",
   },
   {
@@ -100,6 +110,7 @@ const bookData = [
     title: "Now You See Us",
     author: "Balli Kaur Jaswal",
     image: book9,
+    subject: "Comedy",
     releasedate: "March 7, 2023",
   },
   {
@@ -107,6 +118,7 @@ const bookData = [
     title: "Dust Child",
     author: "Nguyễn Phan Quế Mai",
     image: book10,
+    subject: "Emotional",
     releasedate: "March 14, 2023",
   },
   {
@@ -114,6 +126,7 @@ const bookData = [
     title: "The Mostly True Story of Tanner & Louise",
     author: "Colleen Oakley",
     image:book11,
+    subject: "Adventure",
     releasedate: "March 28, 2023",
   },
   {
@@ -121,6 +134,7 @@ const bookData = [
     title: "Homecoming",
     author: "Kate Morton",
     image: book12,
+    subject: "Adventure",
     releasedate: "April 4, 2023",
   },
   {
@@ -128,6 +142,7 @@ const bookData = [
     title: "Symphony of Secrets",
     author: "Brendan Slocumb",
     image: book13,
+    subject: "Romance",
     releasedate: "April 18, 2023",
   },
   {
@@ -135,6 +150,7 @@ const bookData = [
     title: "Silver Alert",
     author: "Lee Smith",
     image: book14,
+    subject: "Romance",
     releasedate: "April 18, 2023",
   },
   {
@@ -142,6 +158,7 @@ const bookData = [
     title: "Only Love Can Hurt Like This",
     author: "Paige Toon",
     image: book15,
+    subject: "Romance",
     releasedate: "April 25, 2023",
   },
   {
@@ -149,6 +166,7 @@ const bookData = [
     title: "Paper Names",
     author: "Susie Luo",
     image: book16,
+    subject: "Comedy",
     releasedate: "May 2, 2023",
   },
   {
@@ -156,6 +174,7 @@ const bookData = [
     title: "The Collected Regrets of Clover",
     author: "Mikki Brammer",
     image: book17,
+    subject: "Melodrama",
     releasedate: "May 9, 2023",
   },
   {
@@ -163,6 +182,7 @@ const bookData = [
     title: "Yellowface",
     author: "R.F. Kuang",
     image: book18,
+    subject: "Melodrama",
     releasedate: "May 16, 2023",
   },
   {
@@ -170,6 +190,7 @@ const bookData = [
     title: "The Second Ending",
     author: "Michelle Hoffman",
     image: book19,
+    subject: "Melodrama",
     releasedate: "May 30, 2023",
   },
   {
@@ -177,6 +198,7 @@ const bookData = [
     title: "The Wishing Game",
     author: "Meg Shaffer",
     image: book20,
+    subject: "Horror",
     releasedate: "May 30, 2023",
   },
   {
@@ -184,6 +206,7 @@ const bookData = [
     title: "Same Time Next Summer",
     author: "Annabel Monaghan",
     image: book21,
+    subject: "Romance",
     releasedate: "June 6, 2023",
   },
   {
@@ -191,6 +214,7 @@ const bookData = [
     title: "Banyan Moon",
     author: "Thao Thai",
     image: book22,
+    subject: "Romance",
     releasedate: "June 27, 2023",
   },
 
@@ -199,6 +223,17 @@ const bookData = [
 const Books = () => {   
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [filteredBooks, setFilteredBooks] = useState(bookData);
+  const [filterCriteria, setFilterCriteria] = useState({
+    title: '',
+    author: '',
+    subject: '',
+    releasedate: '',
+  });
+
+  useEffect(() => {
+    filterBooks();
+  }, [filterCriteria]);
 
   // Calculate indexes for pagination
   const indexOfLastBook = currentPage * booksPerPage;
@@ -208,9 +243,77 @@ const Books = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+ // Filter books
+ const filterBooks = () => {
+  const { title, author, subject, releasedate } = filterCriteria;
+  const filtered = bookData.filter((book) => {
+    const matchesTitle = book.title.toLowerCase().includes(title.toLowerCase());
+    const matchesAuthor = book.author.toLowerCase().includes(author.toLowerCase());
+    const matchesSubject = book.subject.toLowerCase().includes(subject.toLowerCase());
+    const matchesReleaseDate = book.releasedate.toLowerCase().includes(releasedate.toLowerCase());
+    return matchesTitle && matchesAuthor && matchesSubject && matchesReleaseDate;
+  });
+  setFilteredBooks(filtered);
+  setCurrentPage(1);
+};
+
+  // Reset filters
+  const resetFilters = () => {
+    setFilterCriteria({
+      title: '',
+      author: '',
+      subject: '',
+      releasedate: '',
+    });
+    setCurrentPage(1);
+  };
+
   return (
     <div>
       <Title style={{ marginLeft: '50px', marginTop: '40px' }}>All Books</Title>
+
+      <FilterContainer>
+        <BookName>Filter by:</BookName>
+        <Input
+          type="text"
+          placeholder="Title"
+          value={filterCriteria.title}
+          onChange={(e) =>
+            setFilterCriteria((prevState) => ({ ...prevState, title: e.target.value }))
+          }
+        />
+        <Input
+          type="text"
+          placeholder="Author"
+          value={filterCriteria.author}
+          onChange={(e) =>
+            setFilterCriteria((prevState) => ({ ...prevState, author: e.target.value }))
+          }
+        />
+        <Input
+          type="text"
+          placeholder="Genre"
+          value={filterCriteria.subject}
+          onChange={(e) =>
+            setFilterCriteria((prevState) => ({ ...prevState, subject: e.target.value }))
+          }
+        />
+        <Input
+          type="text"
+          placeholder="Release Date"
+          value={filterCriteria.releasedate}
+          onChange={(e) =>
+            setFilterCriteria((prevState) => ({ ...prevState, releasedate: e.target.value }))
+          }
+        />
+        
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '50px'}}>
+
+        <Button style={{ margin: '0 4px', marginBottom: "10px" }} onClick={filterBooks}>Apply Filters</Button>
+        <Button style={{ margin: '0 4px', marginBottom: "10px" }} onClick={resetFilters}>Reset Filters</Button>
+
+        </div>
+      </FilterContainer>
 
       <BooksViewList>
         {currentBooks.map((book) => (
@@ -219,11 +322,13 @@ const Books = () => {
             <BookBody>
               <BookName>{book.title}</BookName>
               <BookDescription>By {book.author}</BookDescription>
+              <BookDescription>Genre: {book.subject}</BookDescription>
               <BookDescription>Release Date: {book.releasedate}</BookDescription>
             </BookBody>
           </BookCard>
         ))}
       </BooksViewList>
+
       {/* Pagination */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '50px', marginTop: '20px'}}>
         {Array.from({ length: Math.ceil(bookData.length / booksPerPage) }).map((_, index) => (
@@ -231,6 +336,18 @@ const Books = () => {
             {index + 1}
           </Button>
         ))}
+      </div>
+
+      {/* Filter Counts */}
+      <div style={{ marginLeft: '50px', marginTop: '20px', marginBottom: '10px' }}>
+        
+        <BookName>
+          Total Filtered Books: {filteredBooks.length}
+        </BookName>
+        <BookName>
+          Total Books in Library: {bookData.length}
+        </BookName>
+
       </div>
     </div>
   );

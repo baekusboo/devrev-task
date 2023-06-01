@@ -279,7 +279,7 @@ export const FormGroup = styled.div`
 `;
 
 export const Label = styled.label`
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 5px;
   margin-right: 10px;
   color: #29A0B1;
@@ -287,9 +287,9 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   padding: 10px;
-  font-size: 20px;
+  font-size: 18px;
   border: none;
-  border-bottom: 1px solid #98D7C2;
+  border-left: 1px solid #98D7C2;
   background: transparent;
   outline: none;
   height: 30px;
@@ -410,3 +410,10 @@ export const NextButton = styled.button`
     opacity: 1;
   }
 `;
+
+export const FilterContainer = styled.div`
+  margin-top: 20px;
+  margin-left: 50px;
+`;
+
+
