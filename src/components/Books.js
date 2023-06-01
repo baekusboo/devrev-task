@@ -315,6 +315,13 @@ const Books = () => {
         </div>
       </FilterContainer>
 
+      {/* Filter Counts */}
+      <div style={{ marginLeft: '50px', marginTop: '20px', marginBottom: '10px' }}>
+        <BookName>
+        Total Books in Library: {bookData.length} | Total Filtered Books: {filteredBooks.length} 
+        </BookName>
+      </div>
+
       <BooksViewList>
         {currentBooks.map((book) => (
           <BookCard key={book.id}>
@@ -338,17 +345,7 @@ const Books = () => {
         ))}
       </div>
 
-      {/* Filter Counts */}
-      <div style={{ marginLeft: '50px', marginTop: '20px', marginBottom: '10px' }}>
-        
-        <BookName>
-          Total Filtered Books: {filteredBooks.length}
-        </BookName>
-        <BookName>
-          Total Books in Library: {bookData.length}
-        </BookName>
 
-      </div>
     </div>
   );
 };
