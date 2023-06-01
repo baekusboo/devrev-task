@@ -103,7 +103,7 @@ export const FooterHeadContainer = styled.div`
   bottom: 0;
   left: 0;
   z-index: 3;
-
+  opacity:0.8;
 `;
 
 export const FooterHeadText = styled.p`
@@ -414,6 +414,8 @@ export const NextButton = styled.button`
 export const FilterContainer = styled.div`
   margin-top: 20px;
   margin-left: 50px;
+  display: flex;
+  justifyContent: flex-end;
 `;
 
 

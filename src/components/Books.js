@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 
 import {
   BooksViewList,
-  Title,
   BookCard,
   BookBody,
   BookImage,
@@ -37,6 +36,9 @@ import book19 from "../images/the-second-ending-book.png";
 import book20 from "../images/the-wishing-game-book.png";
 import book21 from "../images/same-time-next-summer-book.png";
 import book22 from "../images/banyan-moon-book.png";
+import book23 from "../images/crook-manifesto-book.png";
+import book24 from "../images/everyone-here-is-lying-book.png";
+import book25 from "../images/gone-tonight-book.png";
 
 const booksPerPage = 9;
 
@@ -217,7 +219,30 @@ const bookData = [
     subject: "Romance",
     releasedate: "June 27, 2023",
   },
-
+  {
+    id: 23,
+    title: "Crook Manifesto",
+    author: "Kate Morton",
+    image: book23,
+    subject: "Melodrama",
+    releasedate: "June 1, 2008",
+  },
+  {
+    id: 24,
+    title: "Everyone Here Is Lying",
+    author: "Dan Jones and Marina Amaral",
+    image: book24,
+    subject: "Thriller",
+    releasedate: "June 3, 2018",
+  },
+  {
+    id: 25,
+    title: "Gone Tonight",
+    author: "Dan Jones and Marina Amaral",
+    image: book25,
+    subject: "Comedy",
+    releasedate: "June 27, 2008",
+  },
 ];
 
 const Books = () => {   
@@ -238,7 +263,7 @@ const Books = () => {
   // Calculate indexes for pagination
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
-  const currentBooks = bookData.slice(indexOfFirstBook, indexOfLastBook);
+  const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook); // Update this line
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -270,10 +295,14 @@ const Books = () => {
 
   return (
     <div>
-      <Title style={{ marginLeft: '50px', marginTop: '40px' }}>All Books</Title>
+      <div style={{ marginLeft: '50px', marginTop: '20px', marginBottom: '10px' }}>
+        <BookName>
+        Filter by:
+        </BookName>
+      </div>
 
       <FilterContainer>
-        <BookName>Filter by:</BookName>
+        
         <Input
           type="text"
           placeholder="Title"
@@ -307,12 +336,8 @@ const Books = () => {
           }
         />
         
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '50px'}}>
+        <Button style={{ marginBottom: "10px" }} onClick={resetFilters}>Reset Filters</Button>
 
-        <Button style={{ margin: '0 4px', marginBottom: "10px" }} onClick={filterBooks}>Apply Filters</Button>
-        <Button style={{ margin: '0 4px', marginBottom: "10px" }} onClick={resetFilters}>Reset Filters</Button>
-
-        </div>
       </FilterContainer>
 
       {/* Filter Counts */}
