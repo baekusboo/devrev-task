@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
+import addbutton from "../images/add.png";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -16,16 +17,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export const StyledContainer = styled.div`
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #DDFFE7 ;
-    background-size: cover;
-    background-attachment: fixed;
-`;
 
 export const Navbar = styled.div`
   width: 100%;
@@ -38,6 +29,7 @@ export const Navbar = styled.div`
   z-index: 9;
   display: flex;
   align-items: center;
+  opacity:0.8;
 `;
 
 export const BrandLogo = styled.img`
@@ -110,7 +102,8 @@ export const FooterHeadContainer = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;  
+  z-index: 3;
+
 `;
 
 export const FooterHeadText = styled.p`
@@ -120,34 +113,50 @@ export const FooterHeadText = styled.p`
   text-align: center;
 `;
 
-export const BookTitle = styled.h1`
+export const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+export const ContentContainer = styled.div`
+  flex-grow: 1;
+  padding-bottom: 80px; 
+  
+`;
+
+export const HeadTitle = styled.h1`
   padding-left: 50px;
+  color: #167D7F;
+  text-align: center;
   text-transform: capitalize;
   margin-top: 80px;
 `;
 
-export const BookDescription = styled.p`
+export const HeadDescription = styled.p`
   width: 80%;
   line-height: 30px;
   padding-left: 50px;
   margin-top: 30px;
-  opacity: 0.8;
+  color: #29A0B1;
+  font-size: 16px;
+
 `;
 
 export const Title = styled.h2`
-  color: #fff;
+  color: #167D7F;
   opacity: 0.9;
-  padding-left: 4%;
+  padding-left: 0;
   text-transform: capitalize;
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 500px;
 `;
 
 export const BooksList = styled.div`
   width: 100%;
   height: 220px;
   position: relative;
-  margin: 10px 0 20px;
+  margin: 10px 0 20px;  
 `;
 
 export const CardContainer = styled.div`
@@ -161,6 +170,17 @@ export const CardContainer = styled.div`
   overflow-x: auto;
   overflow-y: visible;
   scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    display: none; 
+  }
+
+  @media screen and (max-width: 768px) {
+    .CardContainer {
+      flex-wrap: nowrap;
+    }
+  }
+
 `;
 
 export const Card = styled.div`
@@ -178,11 +198,45 @@ export const Card = styled.div`
   }
 `;
 
+export const BookCard = styled.div`
+display: flex;
+align-items: center;
+margin-bottom: 20px;
+`;
+
+export const BookName = styled.h2`
+font-size: 18px;
+margin-bottom: 5px;
+color: #29A0B1 ;
+`;
+
+export const BooksViewList = styled.div`
+display: flex;
+flex-wrap: wrap;
+`;
+
+export const BookDescription = styled.p`
+  font-size: 14px;
+  margin-bottom: 5px;
+  opacity: 0.8;
+`;
+
 export const CardImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
 `;
+
+export const BookBody = styled.div`
+  flex: 1;
+`;
+
+export const BookImage = styled.img`
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  padding: 20px;
+`; 
 
 export const CardBody = styled.div`
   opacity: 0;
@@ -201,21 +255,74 @@ export const CardBody = styled.div`
   }
 `;
 
-export const Name = styled.p`
-  color: #fff;
+export const CardName = styled.p`
+  color: #000;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: bold;
   text-transform: capitalize;
   margin-top: 60%;
 `;
 
-export const Description = styled.p`
-  color: #fff;
+export const CardDescription = styled.p`
+  color: #000;
   opacity: 0.8;
   margin: 5px 0;
   font-weight: 500;
   font-size: 12px;
 `;
+
+export const FormGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  align-items: center;
+`;
+
+export const Label = styled.label`
+  font-size: 20px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  color: #29A0B1;
+`;
+
+export const Input = styled.input`
+  padding: 10px;
+  font-size: 20px;
+  border: none;
+  border-bottom: 1px solid #98D7C2;
+  background: transparent;
+  outline: none;
+  height: 30px;
+  color: #29A0B1;
+  width: 250px;
+  font-weight: 500;
+  
+  &::placeholder {
+    color: #98D7C2;
+  }
+`;
+
+export const Button = styled.button`
+  background-color: #167D7F;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  &:hover {
+    background-color: #29A0B1;
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
+
 
 export const BorrowListButton = styled.button`
   position: relative;
@@ -226,7 +333,7 @@ export const BorrowListButton = styled.button`
   outline: none;
   font-weight: 500;
   text-align: right;
-  color: rgba(255, 255, 255, 0.5);
+  color: #000;
   margin: 5px 0;
   cursor: pointer;
   padding: 10px 5px;
@@ -239,15 +346,21 @@ export const BorrowListButton = styled.button`
     left: -5px;
     height: 35px;
     width: 35px;
-    background-image: url(images/add.png);
+    background-image:url(${addbutton});
     background-size: cover;
     transform: scale(0.4);
+    transition: transform 0.3s ease; 
   }
 
   &:hover {
     color: #fff;
     background: rgba(255, 255, 255, 0.1);
   }
+
+  &:hover:before {
+    transform: scale(0.5); 
+  }
+
 `;
 
 export const PreviousButton = styled.button`
@@ -260,7 +373,8 @@ export const PreviousButton = styled.button`
   outline: none;
   cursor: pointer;
   left: 0;
-  background: linear-gradient(to right, #167D7F 0%, #167D7F00);
+  background: #98D7C2;
+  opacity:0.5;
 
   img {
     width: 15px;
@@ -283,7 +397,8 @@ export const NextButton = styled.button`
   outline: none;
   cursor: pointer;
   right: 0;
-  background: linear-gradient(to left, #167D7F 0%, #167D7F00);
+  background: #98D7C2;
+  opacity:0.5;
 
   img {
     width: 15px;

@@ -6,16 +6,17 @@ import {
 } from '../components/Styles';
 import NavbarHead  from '../components/NavbarHead';
 import FooterBottom  from '../components/FooterBottom';
-import BookCards from '../components/bookcards';
+import Books from '../components/Books';
 
-const Home = () => {
+
+const ViewBooks = () => {
   return (
     <div>
       <NavbarHead />
       <PageContainer>
         <ContentContainer>
-          <HeadTitle style={{ marginTop: '130px' }}>Library Management System</HeadTitle>
-          <BookCards/>
+          <HeadTitle style={{ marginTop: '130px' }}>Books Library</HeadTitle>
+          <Books/>
         </ContentContainer>
       <FooterBottom />
       </PageContainer>
@@ -23,4 +24,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default ViewBooks;
