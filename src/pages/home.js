@@ -14,7 +14,7 @@ const Home = () => {
       <NavbarHead />
       <PageContainer>
         <ContentContainer>
-          <HeadTitle style={{ marginTop: '130px' }}>Library Management System</HeadTitle>
+          <HeadTitle style={{marginTop: '130px'}}>Library Management System</HeadTitle>
           <BookCards/>
         </ContentContainer>
       <FooterBottom />
