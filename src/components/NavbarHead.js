@@ -71,7 +71,7 @@ const NavbarHead = () => {
             <NavLink href="/viewbooks">View Books</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/borrowbooks">Borrow Books</NavLink>
+            <NavLink href="/borrowbooks">Borrowed Books</NavLink>
           </NavItem>
         </NavLinks>
         <RightContainer>

@@ -1,17 +1,18 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
+import {bookData} from './Books';
 
 import {
     PreviousButton,
     NextButton,
     BorrowListButton,
     BooksList,
-    Title,
     Card,
     CardBody,
     CardContainer,
     CardImage,
     CardName,
     CardDescription,
+    Title,
   } from './Styles';
 
   import leftArrowImage from "../images/left-arrow.png";
@@ -40,14 +41,37 @@ import {
   import book22 from "../images/banyan-moon-book.png";
 
 const BookCards = () => {
-    
-    useEffect(() => {
+  
+const [borrowedBooks, setBorrowedBooks] = useState([]);
 
+const handleBorrowClick = (book) => {
+  const selectedBook = bookData.find((item) => item.image === book);
+  if (selectedBook) {
+    setBorrowedBooks((prevBorrowedBooks) => [...prevBorrowedBooks, selectedBook]);
+    console.log(borrowedBooks);
+    alert(`Borrowed Book Details:\nTitle: ${selectedBook.title}\nAuthor: ${selectedBook.author}\nSubject: ${selectedBook.subject}\nRelease Date: ${selectedBook.releasedate}`);
+  }
+};
+
+useEffect(() => {
+  // Retrieve borrowed books from local storage
+  const storedBorrowedBooks = localStorage.getItem('borrowedBooks');
+  if (storedBorrowedBooks) {
+    const parsedBorrowedBooks = JSON.parse(storedBorrowedBooks);
+    setBorrowedBooks((prevBorrowedBooks) => [...prevBorrowedBooks, ...parsedBorrowedBooks]);
+  }
+}, []);
+
+useEffect(() => {
+  // Save borrowed books to local storage whenever the list changes
+  localStorage.setItem('borrowedBooks', JSON.stringify(borrowedBooks));
+}, [borrowedBooks]);
+
+    useEffect(() => {
         const handleResize = () => {
           cardContainerRef1.scrollLeft = 0; // Reset scroll position on resize
           cardContainerRef2.scrollLeft = 0; // Reset scroll position on resize
           cardContainerRef3.scrollLeft = 0; // Reset scroll position on resize
-
         };
       
         window.addEventListener('resize', handleResize);
@@ -91,7 +115,7 @@ const BookCards = () => {
                 <CardDescription>
                     Age of Vice by Deepti Kapoor.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book1)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -103,7 +127,7 @@ const BookCards = () => {
                 <CardDescription>
                     City Under One Roof by Iris Yamashita.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book2)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -115,7 +139,7 @@ const BookCards = () => {
                 <CardDescription>
                 The World and All That It Holds by Aleksandar Hemon.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book3)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -127,7 +151,7 @@ const BookCards = () => {
                 <CardDescription>
                 Maame by Jessica George.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book4)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -139,7 +163,7 @@ const BookCards = () => {
                 <CardDescription>
                 Essex Dogs by Dan Jones.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book5)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -151,7 +175,7 @@ const BookCards = () => {
                 <CardDescription>
                 What Happened to Ruthy Ramirez by Claire Jiménez.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book6)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -163,7 +187,7 @@ const BookCards = () => {
                 <CardDescription>
                 A Death at the Party by Amy Stuart.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book7)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -175,7 +199,7 @@ const BookCards = () => {
                 <CardDescription>
                 The God of Endings by Jacqueline Holland.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book8)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -187,7 +211,7 @@ const BookCards = () => {
                 <CardDescription>
                 Now You See Us by Balli Kaur Jaswal.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book9)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -199,7 +223,7 @@ const BookCards = () => {
                 <CardDescription>
                 Dust Child by Nguyễn Phan Quế Mai.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book10)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -211,7 +235,7 @@ const BookCards = () => {
                 <CardDescription>
                 The Mostly True Story of Tanner & Louise by Colleen Oakley.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book11)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -223,7 +247,7 @@ const BookCards = () => {
                 <CardDescription>
                 Homecoming by Kate Morton.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book12)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -235,7 +259,7 @@ const BookCards = () => {
                 <CardDescription>
                 Symphony of Secrets by Brendan Slocumb.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book13)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -247,7 +271,7 @@ const BookCards = () => {
                 <CardDescription>
                 Silver Alert by Lee Smith.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book14)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -259,7 +283,7 @@ const BookCards = () => {
                 <CardDescription>
                 Only Love Can Hurt Like This by Paige Toon.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book15)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -271,7 +295,7 @@ const BookCards = () => {
                 <CardDescription>
                 Paper Names by Susie Luo.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book16)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -283,7 +307,7 @@ const BookCards = () => {
                 <CardDescription>
                 The Collected Regrets of Clover by Mikki Brammer.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book17)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -295,7 +319,7 @@ const BookCards = () => {
                 <CardDescription>
                 Yellowface by R.F. Kuang.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book18)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -307,7 +331,7 @@ const BookCards = () => {
                 <CardDescription>
                 The Second Ending by Michelle Hoffman.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book19)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -319,7 +343,7 @@ const BookCards = () => {
                 <CardDescription>
                 The Wishing Game by Meg Shaffer.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book20)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -331,7 +355,7 @@ const BookCards = () => {
                 <CardDescription>
                 Same Time Next Summer by Annabel Monaghan.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book21)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -343,7 +367,7 @@ const BookCards = () => {
                 <CardDescription>
                 Banyan Moon by Thao Thai.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book22)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -370,7 +394,7 @@ const BookCards = () => {
                 <CardDescription>
                 Paper Names by Susie Luo.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book16)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -382,7 +406,7 @@ const BookCards = () => {
                 <CardDescription>
                 The Collected Regrets of Clover by Mikki Brammer.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book17)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -394,7 +418,7 @@ const BookCards = () => {
                 <CardDescription>
                 Yellowface by R.F. Kuang.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book18)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -407,7 +431,7 @@ const BookCards = () => {
                 <CardDescription>
                 The Second Ending by Michelle Hoffman.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book19)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -419,7 +443,7 @@ const BookCards = () => {
                 <CardDescription>
                 The Wishing Game by Meg Shaffer.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book20)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -431,7 +455,7 @@ const BookCards = () => {
                 <CardDescription>
                 Same Time Next Summer by Annabel Monaghan.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book21)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -443,7 +467,7 @@ const BookCards = () => {
                 <CardDescription>
                 Banyan Moon by Thao Thai.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book22)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -454,7 +478,7 @@ const BookCards = () => {
                 <CardDescription>
                     City Under One Roof by Iris Yamashita.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book2)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -466,7 +490,7 @@ const BookCards = () => {
                 <CardDescription>
                 The World and All That It Holds by Aleksandar Hemon.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book3)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -478,7 +502,7 @@ const BookCards = () => {
                 <CardDescription>
                 Maame by Jessica George.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book4)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -490,7 +514,7 @@ const BookCards = () => {
                 <CardDescription>
                 Essex Dogs by Dan Jones.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book5)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -502,7 +526,7 @@ const BookCards = () => {
                 <CardDescription>
                 What Happened to Ruthy Ramirez by Claire Jiménez.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book6)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -514,7 +538,7 @@ const BookCards = () => {
                 <CardDescription>
                 A Death at the Party by Amy Stuart.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book7)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -526,7 +550,7 @@ const BookCards = () => {
                 <CardDescription>
                 The God of Endings by Jacqueline Holland.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book8)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -538,7 +562,7 @@ const BookCards = () => {
                 <CardDescription>
                     Age of Vice by Deepti Kapoor.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book1)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -550,7 +574,7 @@ const BookCards = () => {
                 <CardDescription>
                 Now You See Us by Balli Kaur Jaswal.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book9)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -562,7 +586,7 @@ const BookCards = () => {
                 <CardDescription>
                 Dust Child by Nguyễn Phan Quế Mai.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book10)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -574,7 +598,7 @@ const BookCards = () => {
                 <CardDescription>
                 The Mostly True Story of Tanner & Louise by Colleen Oakley.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book11)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -586,7 +610,7 @@ const BookCards = () => {
                 <CardDescription>
                 Homecoming by Kate Morton.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book12)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -598,7 +622,7 @@ const BookCards = () => {
                 <CardDescription>
                 Symphony of Secrets by Brendan Slocumb.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book13)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -610,7 +634,7 @@ const BookCards = () => {
                 <CardDescription>
                 Silver Alert by Lee Smith.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book14)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -622,7 +646,7 @@ const BookCards = () => {
                 <CardDescription>
                 Only Love Can Hurt Like This by Paige Toon.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book15)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -648,7 +672,7 @@ const BookCards = () => {
                 <CardDescription>
                 Homecoming by Kate Morton.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book12)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -660,7 +684,7 @@ const BookCards = () => {
                 <CardDescription>
                 Symphony of Secrets by Brendan Slocumb.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book13)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -672,7 +696,7 @@ const BookCards = () => {
                 <CardDescription>
                 Silver Alert by Lee Smith.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book14)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -684,7 +708,7 @@ const BookCards = () => {
                 <CardDescription>
                 Only Love Can Hurt Like This by Paige Toon.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book15)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -696,7 +720,7 @@ const BookCards = () => {
                 <CardDescription>
                     Age of Vice by Deepti Kapoor.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book1)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -708,7 +732,7 @@ const BookCards = () => {
                 <CardDescription>
                     City Under One Roof by Iris Yamashita.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book2)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -720,7 +744,7 @@ const BookCards = () => {
                 <CardDescription>
                 The World and All That It Holds by Aleksandar Hemon.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book3)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -732,7 +756,7 @@ const BookCards = () => {
                 <CardDescription>
                 Maame by Jessica George.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book4)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -744,7 +768,7 @@ const BookCards = () => {
                 <CardDescription>
                 Essex Dogs by Dan Jones.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book5)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -756,7 +780,7 @@ const BookCards = () => {
                 <CardDescription>
                 What Happened to Ruthy Ramirez by Claire Jiménez.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book6)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -768,7 +792,7 @@ const BookCards = () => {
                 <CardDescription>
                 A Death at the Party by Amy Stuart.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book7)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -780,7 +804,7 @@ const BookCards = () => {
                 <CardDescription>
                 The God of Endings by Jacqueline Holland.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book8)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -792,7 +816,7 @@ const BookCards = () => {
                 <CardDescription>
                 Now You See Us by Balli Kaur Jaswal.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book9)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -804,7 +828,7 @@ const BookCards = () => {
                 <CardDescription>
                 Dust Child by Nguyễn Phan Quế Mai.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book10)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -816,7 +840,7 @@ const BookCards = () => {
                 <CardDescription>
                 The Mostly True Story of Tanner & Louise by Colleen Oakley.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book11)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -828,7 +852,7 @@ const BookCards = () => {
                 <CardDescription>
                 Paper Names by Susie Luo.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book16)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -840,7 +864,7 @@ const BookCards = () => {
                 <CardDescription>
                 The Collected Regrets of Clover by Mikki Brammer.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book17)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -852,7 +876,7 @@ const BookCards = () => {
                 <CardDescription>
                 Yellowface by R.F. Kuang.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book18)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -864,7 +888,7 @@ const BookCards = () => {
                 <CardDescription>
                 The Second Ending by Michelle Hoffman.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book19)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -876,7 +900,7 @@ const BookCards = () => {
                 <CardDescription>
                 The Wishing Game by Meg Shaffer.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book20)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -888,7 +912,7 @@ const BookCards = () => {
                 <CardDescription>
                 Same Time Next Summer by Annabel Monaghan.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book21)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>
@@ -900,7 +924,7 @@ const BookCards = () => {
                 <CardDescription>
                 Banyan Moon by Thao Thai.
                 </CardDescription>
-                <BorrowListButton>
+                <BorrowListButton onClick={() => handleBorrowClick(book22)}>
                     Borrow Book
                 </BorrowListButton>
               </CardBody>

@@ -1,17 +1,23 @@
 import React from 'react';
 import {
-    GlobalStyle, HeadTitle
+    ContentContainer, HeadTitle, PageContainer
   } from '../components/Styles';
 import NavbarHead  from '../components/NavbarHead';
 import FooterBottom  from '../components/FooterBottom';
+import BorrowedBooks  from '../components/BorrowedBooks';
 
 const Borrow = () => {
+
     return (
         <div>
-            <GlobalStyle />
-            <NavbarHead />
+        <NavbarHead />
+        <PageContainer>
+            <ContentContainer>
             <HeadTitle  style={{ marginTop: '130px' }}>Your Books</HeadTitle>
-            <FooterBottom />
+                <BorrowedBooks />
+            </ContentContainer>
+        <FooterBottom />
+        </PageContainer>
         </div>
     );
 };

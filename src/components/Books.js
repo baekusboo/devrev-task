@@ -1,6 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
 
 import {
   BooksViewList,
@@ -42,7 +40,7 @@ import book25 from "../images/gone-tonight-book.png";
 
 const booksPerPage = 9;
 
-const bookData = [
+export const bookData = [
   {
     id: 1,
     title: "Age of Vice",
@@ -263,7 +261,7 @@ const Books = () => {
   // Calculate indexes for pagination
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
-  const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook); // Update this line
+  const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook);
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -369,8 +367,6 @@ const Books = () => {
           </Button>
         ))}
       </div>
-
-
     </div>
   );
 };
